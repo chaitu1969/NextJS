@@ -19,10 +19,7 @@ const page = () => {
               <div className="text-3xl font-extrabold">Sign in</div>
             </div>
             <div className="pt-2">
-              <LabelledInput
-                lable="Username"
-                placeholder="harkirat@gmail.com"
-              />
+              <LabelledInput lable="Username" placeholder="user@gmail.com" />
               <LabelledInput
                 lable="Password"
                 type={"password"}
