@@ -10,12 +10,12 @@ export default function Signin() {
           <input
             type="text"
             placeholder="username"
-            className="m-2 rounded-md text-center"
+            className="m-2 rounded-md text-center text-black"
           />
           <input
             type="password"
             placeholder="password"
-            className="m-2 rounded-md text-center"
+            className="m-2 rounded-md text-center text-black"
           />
         </div>
         <button

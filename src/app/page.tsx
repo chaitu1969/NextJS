@@ -45,6 +45,7 @@
 //   );
 // }
 
+import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 /** SSR */
 
@@ -68,16 +69,43 @@ import Link from "next/link";
 
 /** Link */
 
-export default function Home() {
+const client = new PrismaClient();
+
+async function getUserDetails() {
+  try {
+    const user = await client.user.findFirst();
+    return {
+      name: user?.username,
+      email: `${user?.username}@gmail.com`,
+    };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export default async function Home() {
+  const user = await getUserDetails();
+
   return (
     <div className=" flex-col text-lg w-screen h-screen flex items-center justify-center">
       Todo Application
-      <Link href="/signup" className="text-lg border p-2 m-2 ">
-        Singup in to Todo App
-      </Link>
-      <Link href="/signin" className="text-lg border p-2 m-2 ">
-        Singin in to Todo App
-      </Link>
+      <br />
+      <>
+        {user ? (
+          <>
+            Name : {user.name} <br /> Email : {user.email}
+          </>
+        ) : (
+          <>
+            <Link href="/signup" className="text-lg border p-2 m-2 ">
+              Singup in to Todo App
+            </Link>
+            <Link href="/signin" className="text-lg border p-2 m-2 ">
+              Singin in to Todo App
+            </Link>
+          </>
+        )}
+      </>
     </div>
   );
 }
